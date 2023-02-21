@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
+def table_page():
     users = [
         {'first_name': 'Michael', 'last_name': 'Choi'},
         {'first_name': 'John', 'last_name': 'Supsupin'},
