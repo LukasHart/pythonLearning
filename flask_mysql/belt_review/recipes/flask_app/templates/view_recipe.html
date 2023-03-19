@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block nav %}
+<a href="/logout" class="btn btn-warning">Logout</a>
+<a href="/dashboard" class="btn btn-warning">Back to recipes</a>
+{% endblock %}
+
+{% block title %} Welcome {{session['first_name']}} {% endblock %}
+
+{% block content %}
+<div class="card mt-5">
+    <div class="card-header">
+        <h4>{{recipe.name}}</h6>
+    </div>
+    <div class="card-body">
+        <div>
+            <h5>Recipe Description</h2>
+            <p>{{recipe.description}}</p>
+        </div>
+        
+        <div>
+            <h5>Under 30 minutes?</h5>
+            {% if recipe.under_30 == 1 %}
+                <p>Yes</p>
+            {% else %}
+                <p>No</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <h5>Instructions</h5>
+            <p>{{recipe.instructions}}</p>
+        </div>
+
+        <div>
+            <h5>Recipe Added</h5>
+            <p>{{recipe.date_cooked.strftime("%b, %d, %Y")}}</p>
+        </div>
+
+        <div>
+            <h6>Added by : {{recipe.created_by.first_name}}</h6>
+        </div>
+    </div>
+</div>
+{% endblock %}

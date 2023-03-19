@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block nav %}
+<a href="/logout" class="btn btn-warning">Logout</a>
+<a href="/dashboard" class="btn btn-warning">Back to recipes</a>
+{% endblock %}
+
+{% block title%}Add a new recipe{% endblock %}
+
+{% block content %}
+<form action="/add/recipe" method="POST">
+    <div>
+        <div class="form-group w-25">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control">
+        </div>
+
+        <div class="form-group w-50">
+            <label for="description">Description</label>
+            <textarea class="form-control" name="description" rows="3"></textarea>
+        </div>
+
+        <div class="form-group w-50">
+            <label for="description">Instructions</label>
+            <textarea class="form-control" name="instructions" rows="3"></textarea>
+        </div>
+
+        <div class="form-group w-25">
+            <label for="date cooked">Date made</label>
+            <input type="date" name="date_cooked" class="form-control">
+        </div>
+
+        <div class="form-group mt-3">
+            <p>Recipe under 30 minutes?</p>
+
+            <label class="form-check-label" for="under_30">Yes</label>
+            <input class="form-check-input" type="radio" name="under_30" value="1">
+
+            <label class="form-check-label" for="under_30">No</label>
+            <input class="form-check-input" type="radio" name="under_30" value="0">
+        </div>
+
+
+        <div class="mt-3">
+            <input type="submit" value="Add Recipe" class="btn btn-warning">
+        </div>
+
+        <div class="mt-4">
+            {% with messages = get_flashed_messages(category_filter=['post']) %}
+            {% if messages %}
+                {% for message in messages %}
+                <ul>
+                    <li>{{message}}</li>
+                </ul>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+
+    </div>
+    </form>
+{% endblock %}

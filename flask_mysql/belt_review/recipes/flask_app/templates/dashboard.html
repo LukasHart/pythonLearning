@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block nav %}
+    <a href="/logout" class="btn btn-warning">Logout</a>
+{% endblock %}
+
+{% block title %} Welcome {{session['first_name']}} {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h6>All posted recipes:</h6>
+    <table class="table table-bordered table-responsive border-dark">
+        <thead>
+            <tr class="text-center">
+                <th>Recipe Name</th>
+                <th>Under 30</th>
+                <th>Posted By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in recipes %}
+            <tr class="text-center">
+                <td>{{recipe.name}}</td>
+                {% if recipe.under_30 == 1 %}
+                    <td>&#x2713;</td>
+                {% else %}
+                    <td>&#x2715;</td>
+                {% endif %}
+                <td>{{recipe.created_by.first_name}}</td>
+                <td>
+                    {% if session['user_id'] != recipe.created_by.id %}
+                        <a href="/view/recipe/{{recipe.id}}" class="text-decoration-none"> View </a>
+                    {% else %}
+                    <a href="/view/recipe/{{recipe.id}}" class="text-decoration-none"> View </a>
+                    <a href="/edit/recipe/{{recipe.id}}" class="text-decoration-none">Edit </a>
+                    <a href="/delete/recipe/{{recipe.id}}" class="text-decoration-none">Delete </a>
+                    {% endif %}
+                </td>
+            </tr> 
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <a href="/add/recipe" class="btn btn-warning">Add Recipe</a>
+    </div>
+</div>
+{% endblock %}
